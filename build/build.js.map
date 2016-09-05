@@ -1,0 +1,1 @@
+{"version":3,"file":"build.js","sourceRoot":"","sources":["../ts/config/index.ts","../ts/bootstrap/server.ts","../ts/bootstrap/application-factory.ts","../ts/api/door/controller.ts","../ts/api/door/index.ts","../ts/index.ts"],"names":[],"mappings":""}

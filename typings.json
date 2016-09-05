@@ -1,11 +1,10 @@
 {
   "dependencies": {
-    "express": "registry:npm/express#4.14.0+20160810205701"
+    "express": "registry:npm/express#4.14.0+20160815112707"
   },
   "globalDependencies": {
     "body-parser": "registry:dt/body-parser#0.0.0+20160619023215",
     "compression": "registry:dt/compression#0.0.0+20160501162003",
-    "errorhandler": "registry:dt/errorhandler#0.0.0+20160316155526",
     "morgan": "registry:dt/morgan#1.7.0+20160524142355",
     "node": "registry:dt/node#6.0.0+20160807145350"
   }

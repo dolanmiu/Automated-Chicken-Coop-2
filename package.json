@@ -4,7 +4,8 @@
   "description": "A chicken coop express server",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./build/index.js"
   },
   "repository": {
     "type": "git",
@@ -17,7 +18,10 @@
   },
   "homepage": "https://github.com/dolanmiu/Automated-Chicken-Coop-2#readme",
   "dependencies": {
-    "express": "^4.14.0"
+    "body-parser": "^1.15.2",
+    "compression": "^1.6.2",
+    "express": "^4.14.0",
+    "morgan": "^1.7.0"
   },
   "devDependencies": {
     "typescript": "^1.8.10",
