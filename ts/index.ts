@@ -1,12 +1,8 @@
-import * as http from "http";
-import {Express} from "express";
-import Server from "./bootstrap/server";
 import {IConfig, ProductionConfig, DevelopmentConfig} from "./config/index";
-import {ApplicationFactory} from "./bootstrap/application-factory";
+import {ApplicationWrapper} from "./bootstrap/application-wrapper";
 
 import {router} from "./api/door";
 
-var application = new ApplicationFactory();
 var config: IConfig;
 
 if (process.env.NODE_ENV === "development") {
@@ -15,10 +11,12 @@ if (process.env.NODE_ENV === "development") {
     config = new ProductionConfig();
 }
 
-var app = application.newInstance(config, "development");
-var httpServer = http.createServer(app);
+var appWrapper = new ApplicationWrapper(config);
 
-app.use("/door", router);
+//appWrapper.App.use("/door", router);
 
-var server = new Server(config, httpServer);
-server.startServer();
+appWrapper.configure(app => {
+    app.use("/door", router);
+});
+
+appWrapper.start();

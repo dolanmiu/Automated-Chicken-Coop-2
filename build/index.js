@@ -1,10 +1,7 @@
 "use strict";
-var http = require("http");
-var server_1 = require("./bootstrap/server");
-var index_1 = require("./config/index");
-var application_factory_1 = require("./bootstrap/application-factory");
-var door_1 = require("./api/door");
-var application = new application_factory_1.ApplicationFactory();
+const index_1 = require("./config/index");
+const application_wrapper_1 = require("./bootstrap/application-wrapper");
+const door_1 = require("./api/door");
 var config;
 if (process.env.NODE_ENV === "development") {
     config = new index_1.DevelopmentConfig();
@@ -12,9 +9,9 @@ if (process.env.NODE_ENV === "development") {
 else {
     config = new index_1.ProductionConfig();
 }
-var app = application.newInstance(config, "development");
-var httpServer = http.createServer(app);
-app.use("/door", door_1.router);
-var server = new server_1["default"](config, httpServer);
-server.startServer();
+var appWrapper = new application_wrapper_1.ApplicationWrapper(config);
+appWrapper.configure(app => {
+    app.use("/door", door_1.router);
+});
+appWrapper.start();
 //# sourceMappingURL=index.js.map

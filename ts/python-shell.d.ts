@@ -1,9 +1,5 @@
 declare module "python-shell" {
     export class PythonShell {
-        static run(scriptName: string, callback: (err: Error, results?: any) => void): void;
-
-        static run(scriptName: string, RunOptions: RunOptions, callback: (err: Error, results?: any) => void): void;
-
         on(message: string, callback: (message: string) => void): void;
         end(callback: (message: string) => void): void;
         send(message: string): void;
@@ -35,4 +31,7 @@ declare module "python-shell" {
         exitCode?: any;
         args?: Array<any>;
     }
+
+    export function run(scriptName: string, RunOptions: RunOptions, callback: (err: Error, results?: any) => void): void;
+    export function run(scriptName: string, callback: (err: Error, results?: any) => void): void;
 }
