@@ -35,13 +35,13 @@ export class ApplicationWrapper {
         this.server = http.createServer(<any>this.app);
     }
 
-    public start(): void {
+    public Start(): void {
         this.server.listen(this.config.port, this.config.ip, () => {
             console.log("Express server listening on %d, in %s mode", this.config.port, process.env.NODE_ENV);
         });
     }
 
-    public configure(func: (app: express.Application) => void) {
+    public Configure(func: (app: express.Application) => void) {
         func(this.app);
     }
 

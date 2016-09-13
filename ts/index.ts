@@ -3,6 +3,8 @@ import {ApplicationWrapper} from "./bootstrap/application-wrapper";
 
 import {router} from "./api/door";
 
+import {Scheduler} from "./scheduler";
+
 var config: IConfig;
 
 if (process.env.NODE_ENV === "development") {
@@ -13,10 +15,11 @@ if (process.env.NODE_ENV === "development") {
 
 var appWrapper = new ApplicationWrapper(config);
 
-//appWrapper.App.use("/door", router);
-
-appWrapper.configure(app => {
+appWrapper.Configure(app => {
     app.use("/door", router);
 });
 
-appWrapper.start();
+var scheduler = new Scheduler();
+
+scheduler.Start();
+appWrapper.Start();

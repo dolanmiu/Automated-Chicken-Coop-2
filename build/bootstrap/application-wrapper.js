@@ -25,12 +25,12 @@ class ApplicationWrapper {
         }
         this.server = http.createServer(this.app);
     }
-    start() {
+    Start() {
         this.server.listen(this.config.port, this.config.ip, () => {
             console.log("Express server listening on %d, in %s mode", this.config.port, process.env.NODE_ENV);
         });
     }
-    configure(func) {
+    Configure(func) {
         func(this.app);
     }
     get App() {
