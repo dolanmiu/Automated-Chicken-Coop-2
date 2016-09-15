@@ -6,7 +6,7 @@ function index(req, res) {
 exports.index = index;
 ;
 function open(req, res) {
-    PythonShell.run("open-door.py", (err, result) => {
+    PythonShell.run("../py/open-door.py", (err, result) => {
         if (err) {
             res.status(500).send("Script had an error: " + err);
             return;
@@ -17,7 +17,7 @@ function open(req, res) {
 exports.open = open;
 ;
 function close(req, res) {
-    PythonShell.run("close-door.py", (err, result) => {
+    PythonShell.run("../py/close-door.py", (err, result) => {
         if (err) {
             res.status(500).send("Script had an error: " + err);
             return;

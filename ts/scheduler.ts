@@ -1,4 +1,5 @@
 import {CronJob} from "cron";
+import * as PythonShell from "python-shell";
 
 export class Scheduler {
 
@@ -10,6 +11,12 @@ export class Scheduler {
             cronTime: '* * * * * *',
             onTick: function () {
                 console.log("Stuff");
+                PythonShell.run("open-door.py", { scriptPath: '../py' }, (err: Error, result: any) => {
+                    if (err) {
+                        console.log("Script had an error: " + err);
+                        return;
+                    }
+                });
             },
             onComplete: () => {
 
