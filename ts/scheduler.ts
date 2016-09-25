@@ -8,7 +8,7 @@ export class Scheduler {
 
     constructor() {
         this.openDoorJob = new CronJob({
-            cronTime: '* * * * * *',
+            cronTime: '0 0 8 * * *',
             onTick: function () {
                 console.log("Stuff");
                 PythonShell.run("open-door.py", { scriptPath: __dirname + '/../py' }, (err: Error, result: any) => {
