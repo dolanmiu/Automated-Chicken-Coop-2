@@ -17,7 +17,7 @@ export class DevelopmentConfig implements IConfig {
 }
 
 export class ProductionConfig implements IConfig {
-    port = 9000;
+    port = 80;
     ip = "0.0.0.0";
     root = "";
     environment = EnvironmentType.Production;
