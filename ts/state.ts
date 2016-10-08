@@ -1,4 +1,4 @@
-enum DoorState {
+export enum DoorState {
     Open = 1, Close = 0
 }
 
@@ -18,6 +18,10 @@ export class State {
     }
 
     public GetDoorBinary(): number {
+        return this.doorState;
+    }
+
+    get DoorState() {
         return this.doorState;
     }
 }
