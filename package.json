@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/dolanmiu/Automated-Chicken-Coop-2#readme",
   "dependencies": {
+    "app-root-path": "^2.0.1",
     "body-parser": "^1.15.2",
     "compression": "^1.6.2",
     "cron": "^1.1.0",
