@@ -21,7 +21,7 @@ export function open(req: Request, res: Response) {
 
     PythonShell.run("open-door.py", { scriptPath: appRoot.path + '/py' }, (err: Error, result: any) => {
         if (err) {
-            res.status(500).send("Script had an error: " + err);
+            res.status(500).send("Script had an error: " + err + ". Path is: " + appRoot.path + "/py");
             return;
         }
 
@@ -43,7 +43,7 @@ export function close(req: Request, res: Response) {
 
     PythonShell.run("close-door.py", { scriptPath: appRoot.path + '/py' }, (err: Error, result: any) => {
         if (err) {
-            res.status(500).send("Script had an error: " + err);
+            res.status(500).send("Script had an error: " + err + ". Path is: " + appRoot.path + "/py");
             return;
         }
 
