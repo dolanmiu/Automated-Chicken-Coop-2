@@ -22,7 +22,7 @@ export class Door {
                 reject("Sending commands too fast. Please wait");
             }
 
-            PythonShell.run("./py/open-door.py", (err: Error, result: any) => {
+            PythonShell.run("open-door.py", { scriptPath: __dirname + '/../py' }, (err: Error, result: any) => {
                 if (err) {
                     reject("Script had an error: " + err);
                     return;
