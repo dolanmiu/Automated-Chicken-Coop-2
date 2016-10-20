@@ -1,62 +1,28 @@
 import {RequestHandler, Request, Response} from "express";
 import * as PythonShell from "python-shell";
-import { State, DoorState } from "../../state";
 import * as appRoot from 'app-root-path';
+import {door} from "../../";
 
-var state = new State();
-var onCooldown: boolean = false;
+
 
 export function index(req: Request, res: Response) {
-    res.status(200).send(state.GetDoorBinary().toString());
+    res.status(200).send(door.State.GetDoorBinary().toString());
 };
 
 export function open(req: Request, res: Response) {
-    if (state.DoorState === DoorState.Open) {
-        res.status(500).send("Door already open");
-    }
-
-    if (onCooldown) {
-        res.status(500).send("Sending commands too fast. Please wait");
-    }
-
-    PythonShell.run("open-door.py", { scriptPath: appRoot.path + '/py' }, (err: Error, result: any) => {
-        if (err) {
-            res.status(500).send("Script had an error: " + err + ". Path is: " + appRoot.path + "/py");
-            return;
-        }
-
-        CommenceCoolDown();
-
-        state.OpenDoor();
+    door.open().then(() => {
         res.status(200);
+
+    }).catch(err => {
+        res.status(500).send(err);
     });
 };
 
 export function close(req: Request, res: Response) {
-    if (state.DoorState === DoorState.Close) {
-        res.status(500).send("Door already closed");
-    }
-
-    if (onCooldown) {
-        res.status(500).send("Sending commands too fast. Please wait");
-    }
-
-    PythonShell.run("close-door.py", { scriptPath: appRoot.path + '/py' }, (err: Error, result: any) => {
-        if (err) {
-            res.status(500).send("Script had an error: " + err + ". Path is: " + appRoot.path + "/py");
-            return;
-        }
-
-        CommenceCoolDown();
-
-        state.CloseDoor();
+    door.close().then(() => {
         res.status(200);
+
+    }).catch(err => {
+        res.status(500).send(err);
     });
 };
-
-function CommenceCoolDown(): void {
-    onCooldown = true;
-    setTimeout(() => {
-        onCooldown = false;
-    }, 10000);
-}

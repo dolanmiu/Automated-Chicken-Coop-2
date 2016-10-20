@@ -1,22 +1,17 @@
 import {CronJob} from "cron";
-import * as PythonShell from "python-shell";
+import {Door} from "./door";
 
 export class Scheduler {
 
     private openDoorJob: CronJob;
     private closeDoorJob: CronJob;
 
-    constructor() {
+    constructor(door: Door) {
         this.openDoorJob = new CronJob({
             cronTime: '0 0 8 * * *',
-            onTick: function () {
-                console.log("Stuff");
-                PythonShell.run("open-door.py", { scriptPath: __dirname + '/../py' }, (err: Error, result: any) => {
-                    if (err) {
-                        console.log("Script had an error: " + err);
-                        return;
-                    }
-                });
+            onTick: () => {
+                console.log("Opening Door");
+                door.open();
             },
             onComplete: () => {
 
@@ -26,7 +21,8 @@ export class Scheduler {
         this.closeDoorJob = new CronJob({
             cronTime: '00 30 11 * * 1-5',
             onTick: () => {
-
+                console.log("Closing Door");
+                door.close();
             },
             onComplete: () => {
 
