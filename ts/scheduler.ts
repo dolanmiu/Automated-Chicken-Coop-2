@@ -8,7 +8,7 @@ export class Scheduler {
 
     constructor(door: Door) {
         this.openDoorJob = new CronJob({
-            cronTime: '0 0 8 * * *',
+            cronTime: '* * * * *',
             onTick: () => {
                 console.log("Opening Door");
                 door.open();
