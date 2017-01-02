@@ -38,6 +38,7 @@ jspm_packages
 
 # Build directory
 build
+dist
 
 # Typings
 typings
