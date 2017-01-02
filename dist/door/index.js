@@ -1,73 +1,60 @@
-import * as PythonShell from "python-shell";
-import { State, DoorState } from "./state";
-
-export class Door {
-
-    private state = new State();
-    private onCooldown: boolean
-
+"use strict";
+const PythonShell = require("python-shell");
+const state_1 = require("./state");
+class Door {
     constructor() {
-        this.state = new State();
+        this.state = new state_1.State();
+        this.state = new state_1.State();
         this.onCooldown = false;
     }
-
-    public open() {
+    open() {
         return new Promise((resolve, reject) => {
-
-            if (this.state.DoorState === DoorState.Open) {
+            if (this.state.DoorState === state_1.DoorState.Open) {
                 reject("Door already open");
             }
-
             if (this.onCooldown) {
                 reject("Sending commands too fast. Please wait");
             }
-
-            PythonShell.run("open-door.py", { scriptPath: __dirname + '/../py' }, (err: Error, result: any) => {
+            PythonShell.run("open-door.py", { scriptPath: __dirname + '/../py' }, (err, result) => {
                 if (err) {
                     reject("Script had an error: " + err);
                     return;
                 }
-
                 this.commenceCoolDown();
-
                 this.state.OpenDoor();
                 resolve();
             });
         });
-    };
-
-    public close() {
+    }
+    ;
+    close() {
         return new Promise((resolve, reject) => {
-            if (this.state.DoorState === DoorState.Close) {
+            if (this.state.DoorState === state_1.DoorState.Close) {
                 reject("Door already closed");
             }
-
             if (this.onCooldown) {
                 reject("Sending commands too fast. Please wait");
             }
-
-            PythonShell.run("close-door.py", { scriptPath: __dirname + '/../py' }, (err: Error, result: any) => {
+            PythonShell.run("close-door.py", { scriptPath: __dirname + '/../py' }, (err, result) => {
                 if (err) {
                     reject("Script had an error: " + err);
                     return;
                 }
-
                 this.commenceCoolDown();
-
                 this.state.CloseDoor();
                 resolve();
             });
         });
-    };
-
-    private commenceCoolDown(): void {
+    }
+    ;
+    commenceCoolDown() {
         this.onCooldown = true;
         setTimeout(() => {
             this.onCooldown = false;
         }, 10000);
     }
-
-    get State(): State {
+    get State() {
         return this.state;
     }
 }
+exports.Door = Door;
